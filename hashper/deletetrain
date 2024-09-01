@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm trainingdata1.txt
+rm trainingdata2.txt
+rm trainingdata3.txt
+rm trainingdata4.txt
+rm trainingdata5.txt
+rm trainingdata6.txt
+rm trainingdata7.txt
+rm trainingdata8.txt

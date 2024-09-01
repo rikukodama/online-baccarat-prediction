@@ -1,0 +1,121 @@
+npm install react-quill quill axios
+npm install --save-dev @types/react-quill
+
+
+
+// ArticleEditor.tsx
+
+import React, { useState, useRef, FC } from 'react';
+import ReactQuill, { Quill } from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import axios from 'axios';
+
+// Extend Quill to include Image Resize Module
+import ImageResize from 'quill-image-resize-module-ts';
+Quill.register('modules/imageResize', ImageResize);
+
+const ArticleEditor: FC = () => {
+  const [editorContent, setEditorContent] = useState<string>('');
+  const quillRef = useRef<ReactQuill>(null);
+
+  const handleEditorChange = (content: string) => {
+    setEditorContent(content);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/save-article', {
+        content: editorContent,
+      });
+      console.log(response.data);
+      alert('Article saved successfully!');
+    } catch (error) {
+      console.error('There was an error saving the article!', error);
+    }
+  };
+
+  const imageHandler = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files ? input.files[0] : null;
+      if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const res = await axios.post('http://localhost:5000/upload-image', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+
+          const imageUrl = res.data; // Assuming the server returns the URL
+          const editor = quillRef.current?.getEditor();
+          const range = editor?.getSelection(true);
+
+          if (range) {
+            editor?.insertEmbed(range.index, 'image', imageUrl);
+          }
+        } catch (err) {
+          console.error('Error uploading image:', err);
+        }
+      }
+    };
+  };
+
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ color: [] }, { background: [] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['link', 'image'],
+        ['clean'],
+      ],
+      handlers: {
+        image: imageHandler,
+      },
+    },
+    imageResize: {
+      // Optional: Configure image resizing
+    },
+  };
+
+  const formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'color',
+    'background',
+  ];
+
+  return (
+    <div>
+      <h1>Article Submission</h1>
+      <ReactQuill
+        ref={quillRef}
+        value={editorContent}
+        onChange={handleEditorChange}
+        modules={modules}
+        formats={formats}
+        placeholder="Start writing your article..."
+      />
+      <button onClick={handleSubmit}>Submit Article</button>
+    </div>
+  );
+};
+
+export default ArticleEditor;

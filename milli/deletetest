@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm testingdataBanker.txt
+rm testingdataPlayer.txt
+rm testingdataTie.txt

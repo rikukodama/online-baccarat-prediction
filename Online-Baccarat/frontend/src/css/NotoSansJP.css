@@ -1,0 +1,42 @@
+/**
+ * @license
+ *
+ * Font Family: Satoshi
+ * Designed by: Deni Anggara
+ * URL: https://www.fontshare.com/fonts/satoshi
+ * © 2023 Indian Type Foundry
+ *
+ * Font Styles:
+ * Satoshi Light
+ * Satoshi Light Italic
+ * Satoshi Regular
+ * Satoshi Italic
+ * Satoshi Medium
+ * Satoshi Medium Italic
+ * Satoshi Bold
+ * Satoshi Bold Italic
+ * Satoshi Black
+ * Satoshi Black Italic
+ *
+*/
+
+@font-face {
+  font-family: NotoSansJP-Black;
+  src: url('../fonts/NotoSansJP-Black.otf');
+}
+@font-face {
+  font-family: NotoSansJP-Light;
+  src: url('../fonts/NotoSansJP-Light.otf');
+}
+@font-face {
+  font-family: NotoSansJP-Bold;
+  src: url('../fonts/NotoSansJP-Bold.otf');
+}
+@font-face {
+  font-family: NotoSansJP-Medium;
+  src: url('../fonts/NotoSansJP-Medium.otf');
+}
+@font-face {
+  font-family: NotoSansJP-Regular;
+  src: url('../fonts/NotoSansJP-Regular.otf');
+}

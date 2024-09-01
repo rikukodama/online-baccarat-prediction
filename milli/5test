@@ -1,0 +1,25 @@
+#!/bin/bash
+
+python shuffle.py
+./test
+sleep .05
+
+python shuffle.py
+./test
+sleep .05
+
+python shuffle.py
+./test
+sleep .05
+
+python shuffle.py
+./test
+sleep .05
+
+python shuffle.py
+./test
+sleep .05
+
+
+
+

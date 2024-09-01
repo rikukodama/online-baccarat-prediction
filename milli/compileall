@@ -1,0 +1,4 @@
+#/bin/bash
+
+g++ baccarat.cpp -o run -lm -fopenmp
+g++ testbaccarat.cpp -o test -lm -fopenmp

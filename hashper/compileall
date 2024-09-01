@@ -1,0 +1,3 @@
+#/bin/bash
+
+g++ baccarat.cpp -o run -lm -fopenmp
